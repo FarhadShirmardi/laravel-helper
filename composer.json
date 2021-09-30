@@ -15,7 +15,8 @@
             "Derakht\\Helpers\\": "src/"
         },
         "files": [
-            "src/"
+            "src/responseHelpers.php",
+            "src/stringHelpers.php"
         ]
     }
 }
