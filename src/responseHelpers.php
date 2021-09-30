@@ -22,7 +22,7 @@ if (!function_exists('validationError')) {
 
 if (!function_exists('apiResponse')) {
     function apiResponse(
-        string $message,
+        ?string $message,
         int $status,
         $data,
         $jsonResourceClassName,
@@ -52,7 +52,7 @@ if (!function_exists('apiResponse')) {
 
 if (!function_exists('responseOK')) {
     function responseOK(
-        string $message,
+        ?string $message,
         $data = null,
         ?string $jsonResourceClassName = null,
         array $metaData = []
@@ -63,7 +63,7 @@ if (!function_exists('responseOK')) {
 
 if (!function_exists('responseError')) {
     function responseError(
-        string $message,
+        ?string $message,
         $data = null,
         ?string $jsonResourceClassName = null,
         array $metaData = []
@@ -74,7 +74,7 @@ if (!function_exists('responseError')) {
 
 if (!function_exists('responseNotFound')) {
     function responseNotFound(
-        string $message = null
+        ?string $message = null
     ): JsonResponse {
         return apiResponse(
             $message ?: trans('not_found'),
