@@ -13,6 +13,9 @@
     "autoload": {
         "psr-4": {
             "Derakht\\Helpers\\": "src/"
-        }
+        },
+        "files": [
+            "src/"
+        ]
     }
 }
