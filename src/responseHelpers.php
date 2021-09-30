@@ -22,11 +22,11 @@ if (!function_exists('validationError')) {
 
 if (!function_exists('apiResponse')) {
     function apiResponse(
-        ?string $message,
-        int $status,
-        $data,
-        $jsonResourceClassName,
-        array $metaData
+        ?string $message = null,
+        int $status = Response::HTTP_OK,
+        $data = null,
+        $jsonResourceClassName = null,
+        array $metaData = []
     ): JsonResponse {
         $metaData += [
             'message' => $message == null ? [] : [$message],
