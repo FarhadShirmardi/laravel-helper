@@ -44,7 +44,7 @@ if (!function_exists('apiResponse')) {
             $jsonResource->additional($metaData);
             return $jsonResource->response()->setStatusCode($status);
         }
-        $metaData += ['data' => $data === null ? [] : $data];
+        $metaData += ['data' => $data];
 
         return response()->json($metaData, $status);
     }
