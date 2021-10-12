@@ -56,9 +56,10 @@ if (!function_exists('responseOK')) {
         ?string $message = null,
         $data = null,
         ?string $jsonResourceClassName = null,
-        array $metaData = []
+        array $metaData = [],
+        array $validation = []
     ): JsonResponse {
-        return apiResponse($message, Response::HTTP_OK, $data, $jsonResourceClassName, $metaData);
+        return apiResponse($message, Response::HTTP_OK, $data, $jsonResourceClassName, $metaData, $validation);
     }
 }
 
