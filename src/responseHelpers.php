@@ -26,7 +26,8 @@ if (!function_exists('apiResponse')) {
         int $status = Response::HTTP_OK,
         $data = null,
         $jsonResourceClassName = null,
-        array $metaData = []
+        array $metaData = [],
+        array $validation = []
     ): JsonResponse {
         $metaData += [
             'message' => $message == null ? [] : [$message],
@@ -41,7 +42,7 @@ if (!function_exists('apiResponse')) {
             } else {
                 $jsonResource = new $jsonResourceClassName($data);
             }
-            $jsonResource->additional($metaData);
+            $jsonResource->additional($metaData + ['validation' => $validation]);
             return $jsonResource->response()->setStatusCode($status);
         }
         $metaData += ['data' => $data];
@@ -52,7 +53,7 @@ if (!function_exists('apiResponse')) {
 
 if (!function_exists('responseOK')) {
     function responseOK(
-        ?string $message,
+        ?string $message = null,
         $data = null,
         ?string $jsonResourceClassName = null,
         array $metaData = []
@@ -63,7 +64,7 @@ if (!function_exists('responseOK')) {
 
 if (!function_exists('responseError')) {
     function responseError(
-        ?string $message,
+        ?string $message = null,
         $data = null,
         ?string $jsonResourceClassName = null,
         array $metaData = []
