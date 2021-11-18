@@ -28,7 +28,8 @@ if (!function_exists('apiResponse')) {
         $jsonResourceClassName = null,
         array $metaData = [],
         array $validation = []
-    ): JsonResponse {
+    ): JsonResponse
+    {
         $metaData += [
             'message' => $message == null ? [] : [$message],
         ];
@@ -45,7 +46,9 @@ if (!function_exists('apiResponse')) {
             $jsonResource->additional($metaData + ['validation' => $validation]);
             return $jsonResource->response()->setStatusCode($status);
         }
-        $metaData += ['validation' => $validation];
+        if ($validation != []) {
+            $metaData += ['validation' => $validation];
+        }
         $metaData += ['data' => $data];
 
         return response()->json($metaData, $status);
@@ -59,7 +62,8 @@ if (!function_exists('responseOK')) {
         ?string $jsonResourceClassName = null,
         array $metaData = [],
         array $validation = []
-    ): JsonResponse {
+    ): JsonResponse
+    {
         return apiResponse($message, Response::HTTP_OK, $data, $jsonResourceClassName, $metaData, $validation);
     }
 }
@@ -70,7 +74,8 @@ if (!function_exists('responseError')) {
         $data = null,
         ?string $jsonResourceClassName = null,
         array $metaData = []
-    ): JsonResponse {
+    ): JsonResponse
+    {
         return apiResponse($message, Response::HTTP_UNPROCESSABLE_ENTITY, $data, $jsonResourceClassName, $metaData);
     }
 }
@@ -78,7 +83,8 @@ if (!function_exists('responseError')) {
 if (!function_exists('responseNotFound')) {
     function responseNotFound(
         ?string $message = null
-    ): JsonResponse {
+    ): JsonResponse
+    {
         return apiResponse(
             $message ?: trans('not_found'),
             Response::HTTP_NOT_FOUND,
