@@ -45,6 +45,7 @@ if (!function_exists('apiResponse')) {
             $jsonResource->additional($metaData + ['validation' => $validation]);
             return $jsonResource->response()->setStatusCode($status);
         }
+        $metaData += ['validation' => $validation];
         $metaData += ['data' => $data];
 
         return response()->json($metaData, $status);
