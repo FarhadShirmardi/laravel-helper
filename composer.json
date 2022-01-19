@@ -16,7 +16,8 @@
         },
         "files": [
             "src/responseHelpers.php",
-            "src/stringHelpers.php"
+            "src/stringHelpers.php",
+            "src/numberHelpers.php"
         ]
     }
 }
