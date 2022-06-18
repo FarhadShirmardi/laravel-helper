@@ -1,7 +1,9 @@
 <?php
 
-if (!function_exists('persianString')) {
-    function persianString($string)
+use Illuminate\Support\Str;
+
+if (! function_exists('persianString')) {
+    function persianString($string): array|string
     {
         $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         $num = range(0, 9);
@@ -12,7 +14,7 @@ if (!function_exists('persianString')) {
 }
 
 if (!function_exists('englishString')) {
-    function englishString($string)
+    function englishString($string): array|string
     {
         $arabicNumbers = ['۰', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
         $persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
@@ -79,93 +81,56 @@ if (!function_exists('reformatPrice')) {
 if (!function_exists('convertNumberToText')) {
     function getNumberTextPostfix($level): string
     {
-        switch ($level) {
-            case 1:
-                return '';
-            case 2:
-                return 'هزار';
-            case 3:
-                return 'میلیون';
-            case 4:
-                return 'بیلیون';
-            case 5:
-                return 'بیلیار';
-            case 6:
-                return 'تریلیون';
-        }
+        return match ($level) {
+            2 => 'هزار',
+            3 => 'میلیون',
+            4 => 'بیلیون',
+            5 => 'بیلیار',
+            6 => 'تریلیون',
+            default => '',
+        };
 
-        return '';
     }
 
     function getDigitText($num, $index): string
     {
         switch ($index) {
             case 1:
-                switch ($num) {
-                    case 1:
-                        return 'یک';
-                    case 2:
-                        return 'دو';
-                    case 3:
-                        return 'سه';
-                    case 4:
-                        return 'چهار';
-                    case 5:
-                        return 'پنج';
-                    case 6:
-                        return 'شش';
-                    case 7:
-                        return 'هفت';
-                    case 8:
-                        return 'هشت';
-                    case 9:
-                        return 'نه';
-                    case 10:
-                        return 'ده';
-                    case 11:
-                        return 'یازده';
-                    case 12:
-                        return 'دوازده';
-                    case 13:
-                        return 'سیزده';
-                    case 14:
-                        return 'چهارده';
-                    case 15:
-                        return 'پانزده';
-                    case 16:
-                        return 'شانزده';
-                    case 17:
-                        return 'هفده';
-                    case 18:
-                        return 'هجده';
-                    case 19:
-                        return 'نوزده';
-                    default:
-                        return '';
-                }
+                return match ($num) {
+                    1 => 'یک',
+                    2 => 'دو',
+                    3 => 'سه',
+                    4 => 'چهار',
+                    5 => 'پنج',
+                    6 => 'شش',
+                    7 => 'هفت',
+                    8 => 'هشت',
+                    9 => 'نه',
+                    10 => 'ده',
+                    11 => 'یازده',
+                    12 => 'دوازده',
+                    13 => 'سیزده',
+                    14 => 'چهارده',
+                    15 => 'پانزده',
+                    16 => 'شانزده',
+                    17 => 'هفده',
+                    18 => 'هجده',
+                    19 => 'نوزده',
+                    default => '',
+                };
             case 2:
-                switch ($num) {
-                    case 1:
-                        return 'ده';
-                    case 2:
-                        return 'بیست';
-                    case 3:
-                        return 'سی';
-                    case 4:
-                        return 'چهل';
-                    case 5:
-                        return 'پنجاه';
-                    case 6:
-                        return 'شصت';
-                    case 7:
-                        return 'هفتاد';
-                    case 8:
-                        return 'هشتاد';
-                    case 9:
-                        return 'نود';
-                    default:
-                        return '';
-                }
+                return match ($num) {
+                    1 => 'ده',
+                    2 => 'بیست',
+                    3 => 'سی',
+                    4 => 'چهل',
+                    5 => 'پنجاه',
+                    6 => 'شصت',
+                    7 => 'هفتاد',
+                    8 => 'هشتاد',
+                    9 => 'نود',
+                    default => '',
+                };
             case 3:
                 switch ($num) {
                     case 1:
