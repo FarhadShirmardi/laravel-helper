@@ -86,7 +86,7 @@ if (!function_exists('responseNotFound')) {
     ): JsonResponse
     {
         return apiResponse(
-            $message ?: trans('not_found'),
+            $message ?: trans('message.not_found'),
             Response::HTTP_NOT_FOUND,
             null,
             null,
