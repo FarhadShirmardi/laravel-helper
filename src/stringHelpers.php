@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 
 if (! function_exists('persianString')) {
-    function persianString($string): array|string
+    function persianString($string): string
     {
         $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         $num = range(0, 9);
