@@ -14,7 +14,7 @@ if (! function_exists('persianString')) {
 }
 
 if (!function_exists('englishString')) {
-    function englishString($string): array|string
+    function englishString($string): string
     {
         $arabicNumbers = ['۰', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
         $persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
