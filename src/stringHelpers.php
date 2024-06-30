@@ -9,22 +9,24 @@ if (! function_exists('persianString')) {
         $num = range(0, 9);
         $arabicNumbers = ['۰', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
         $string = str_replace($arabicNumbers, $persian, $string);
+
         return str_replace($num, $persian, $string);
     }
 }
 
-if (!function_exists('englishString')) {
+if (! function_exists('englishString')) {
     function englishString($string): string
     {
         $arabicNumbers = ['۰', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
         $persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         $num = range(0, 9);
         $string = str_replace($persianNumbers, $num, $string);
+
         return str_replace($arabicNumbers, $num, $string);
     }
 }
 
-if (!function_exists('normalizeText')) {
+if (! function_exists('normalizeText')) {
     function normalizeText(string $text): string
     {
         $text = str_replace('ي', 'ی', $text);
@@ -36,49 +38,53 @@ if (!function_exists('normalizeText')) {
     }
 }
 
-if (!function_exists('formatPhoneNumber')) {
+if (! function_exists('formatPhoneNumber')) {
     function formatPhoneNumber(string $phoneNumber): string
     {
         if (Str::startsWith($phoneNumber, '0')) {
-            $phoneNumber = (string)(int)$phoneNumber;
+            $phoneNumber = (string) (int) $phoneNumber;
         } elseif (Str::startsWith($phoneNumber, '+98') and strlen($phoneNumber) != 10) {
             $phoneNumber = substr($phoneNumber, 3);
         } elseif (Str::startsWith($phoneNumber, '98') and strlen($phoneNumber) != 10) {
             $phoneNumber = substr($phoneNumber, 2);
         }
+
         return $phoneNumber;
     }
 }
 
-if (!function_exists('reformatPhoneNumber')) {
+if (! function_exists('reformatPhoneNumber')) {
     function reformatPhoneNumber(string $phoneNumber): string
     {
-        if (!Str::startsWith($phoneNumber, '0')) {
-            $phoneNumber = '0' . $phoneNumber;
+        if (! Str::startsWith($phoneNumber, '0')) {
+            $phoneNumber = '0'.$phoneNumber;
         }
+
         return $phoneNumber;
     }
 }
 
-if (!function_exists('formatPrice')) {
+if (! function_exists('formatPrice')) {
     function formatPrice($number): string
     {
         if ($number < 0) {
-            return '-' . number_format($number * -1);
+            return '-'.number_format($number * -1);
         }
+
         return number_format($number);
     }
 }
 
-if (!function_exists('reformatPrice')) {
+if (! function_exists('reformatPrice')) {
     function reformatPrice($number): int
     {
         $number = str_replace(',', '', $number);
+
         return intval($number);
     }
 }
 
-if (!function_exists('convertNumberToText')) {
+if (! function_exists('convertNumberToText')) {
     function getNumberTextPostfix($level): string
     {
         return match ($level) {
@@ -155,6 +161,7 @@ if (!function_exists('convertNumberToText')) {
                         return '';
                 }
         }
+
         return '';
     }
 
@@ -168,8 +175,8 @@ if (!function_exists('convertNumberToText')) {
                 $n = $num % 10;
                 if ($n != 0 or $nn != 0) {
                     $text =
-                        getDigitText($nn < 20 ? $nn : $n, $index) . (($index == 1 or $text == '') ? '' :
-                            ' و ') . $text;
+                        getDigitText($nn < 20 ? $nn : $n, $index).(($index == 1 or $text == '') ? '' :
+                            ' و ').$text;
                 }
                 $index += $nn < 20 ? 2 : 1;
                 $num = intval($num / ($nn < 20 ? 100 : 10));
@@ -180,13 +187,14 @@ if (!function_exists('convertNumberToText')) {
                 $numText = convertNumberToText($n);
                 $text =
                     ($numText == '' ? '' :
-                        ($numText . ' ' . getNumberTextPostfix($index))) . (($numText == '' or $index == 1 or $text == '') ?
+                        ($numText.' '.getNumberTextPostfix($index))).(($numText == '' or $index == 1 or $text == '') ?
                         '' :
-                        ' و ') . $text;
+                        ' و ').$text;
                 $index++;
                 $num = intval($num / 1000);
             }
         }
+
         return trim($text);
     }
 }
