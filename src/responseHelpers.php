@@ -4,7 +4,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
+use Illuminate\Pagination\CursorPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Validator;
 
@@ -39,9 +41,11 @@ if (! function_exists('apiResponse')) {
         if ($data !== null and $resource !== null) {
             if ($data instanceof Collection or
                 $data instanceof \Illuminate\Support\Collection or
-                $data instanceof LengthAwarePaginator
+                $data instanceof LengthAwarePaginator or
+                $data instanceof CursorPaginator or
+                $data instanceof Paginator
             ) {
-                /** @var JsonResource $jsonResource */
+                /** @var JsonResource $resource */
                 $jsonResource = ($resource)::collection($data);
             } else {
                 $jsonResource = new $resource($data);
